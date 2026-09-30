@@ -1,0 +1,21 @@
+{
+  "name": "guangdong-wind-watch",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Live wind barb map and station observations for Guangdong",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^6.0.0",
+    "@types/leaflet": "^1.9.22",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1"
+  }
+}
