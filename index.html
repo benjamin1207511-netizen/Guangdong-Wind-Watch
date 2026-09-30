@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Guangdong Wind Watch · 广东实况风场</title>
+   <meta name="description" content="Live wind speed and direction at every automatic weather station in Guangdong, drawn as wind barbs and refreshed automatically." />
+   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+ </head>
+ <body>
+   <div id="map" aria-label="Map of Guangdong wind observations"></div>
+
+
+
+   <aside class="panel" id="panel">
+     <header class="brand">
+       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28V6M16 6l9 -4M16 11l9 -4M16 16l5 -2.2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/><circle cx="16" cy="28" r="2.6" fill="currentColor"/></svg>
+       <div>
+         <h1>Guangdong Wind Watch</h1>
+         <p class="brand-sub">广东自动站实况风场 · Live station winds</p>
+       </div>
+       <button class="icon-btn panel-toggle" id="panelToggle" aria-label="Collapse panel">‹</button>
+     </header>
+
+
+
+     <div class="panel-body">
+       <div class="status" id="status">
+         <span class="dot" id="statusDot"></span>
+         <div>
+           <div id="observedAt">Loading observations…</div>
+           <div class="muted" id="nextRefresh"></div>
+         </div>
+         <button class="ghost-btn" id="refreshBtn" title="Refresh now">Refresh</button>
+       </div>
+
+
+
+       <div class="segmented" role="tablist" aria-label="Wind field">
+         <button role="tab" data-field="mean" aria-selected="true">10-min mean</button>
+         <button role="tab" data-field="gust" aria-selected="false">Hourly max gust</button>
+       </div>
+
+
+
+       <label class="field">
+         <span>Region</span>
+         <select id="citySelect"><option value="">All Guangdong</option></select>
+       </label>
+
+
+
+       <div class="kpis">
+         <div class="kpi"><div class="kpi-label">Stations</div><div class="kpi-value" id="kpiCount">—</div></div>
+         <div class="kpi"><div class="kpi-label">Strongest</div><div class="kpi-value" id="kpiMax">—</div></div>
+         <div class="kpi"><div class="kpi-label">Force ≥ 6</div><div class="kpi-value" id="kpiStrong">—</div></div>
+       </div>
+
+
+
+       <section>
+         <h2 class="section-title">Distribution by Beaufort force</h2>
+         <div id="histogram" class="histogram"></div>
+         <div id="compassRose" class="rose-wrap"></div>
+       </section>
+
+
+
+       <section>
+         <h2 class="section-title">Strongest stations</h2>
+         <ol id="topList" class="top-list"></ol>
+       </section>
+
+
+
+       <section class="controls">
+         <label class="field inline">
+           <span>Barb density</span>
+           <input type="range" id="density" min="16" max="48" step="2" value="26" />
+         </label>
+         <label class="check"><input type="checkbox" id="showAll" /> Show every station (dense)</label>
+         <label class="check"><input type="checkbox" id="showBorders" checked /> Prefecture boundaries</label>
+       </section>
+
+
+
+       <footer class="credit">
+         Data: Guangdong meteorological automatic stations via
+         <a href="http://218.17.86.92/city/jieyang/index.html" target="_blank" rel="noopener">揭阳台风网</a>.
+         Map barbs show Beaufort force (half = 2, full = 4, pennant = 20 m/s). Click any barb for full observations.
+       </footer>
+     </div>
+   </aside>
+
+
+
+   <div class="legend" id="legend"></div>
+   <div class="hover-tip" id="hoverTip" hidden></div>
+   <aside class="drawer" id="drawer" aria-live="polite"></aside>
+
+
+
+   <script type="module" src="/src/main.ts"></script>
+ </body>
+</html>
